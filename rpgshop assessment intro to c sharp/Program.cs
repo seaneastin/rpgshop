@@ -23,7 +23,6 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
 
         }
-
         public void printshopinventory() //
         {
 
@@ -34,7 +33,11 @@ namespace rpgshop_assessment_intro_to_c_sharp
         }
         public void menu() //
         {
-
+            Console.WriteLine("pick an option");
+            Console.WriteLine("1:player inventory");
+            Console.WriteLine("2: enter shop");
+            Console.WriteLine("3: ");
+            Console.WriteLine("4: ");
         }
         public void superuser() //here is the debug tools use this for cheats and doing things such as adding things to player inventory or shop inventory
         {
