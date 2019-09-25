@@ -10,7 +10,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
     {
         private string _name = "";
         private int _cost = 0;
-        public Weapon(string name, int cost, int damage) : base(name,cost)
+        public Weapon(string name, int cost, string description , int damage) : base(name,cost, description)
         {
             _name = name;
             _cost = cost;

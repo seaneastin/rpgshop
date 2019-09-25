@@ -15,11 +15,11 @@ namespace rpgshop_assessment_intro_to_c_sharp
         bool gameisrunning = true;
         public void start()
         {
-            Item Empty = new Item("nothing", 0);   //this is used for when you have nothing in your inventory slot
-            Item potion = new Potion("Potion", 10, 10);
-            Item Mastersword = new Weapon("MasterSword", 999, 999);
-            Item superpotion = new Potion("super potion", 20, 30);
-            Item Sword = new Weapon("Sword", 10, 10);
+            Item Empty = new Item("nothing", 0, "please replace me");   //this is used for when you have nothing in your inventory slot
+            Item potion = new Potion("Potion", 10, "please replace me", 10);
+            Item Mastersword = new Weapon("MasterSword", 999, "please replace me", 999);
+            Item superpotion = new Potion("super potion", 20, "please replace me", 30);
+            Item Sword = new Weapon("Sword", 10, "please replace me", 10);
             Item[] playerinventory = { Empty, Empty, Empty, Empty, Empty }; //this is the players inventory
             Item[] shopinventory = { Empty, Empty, Empty };  // this is the shops inventory
             Item[] ItemList = { Mastersword, potion, Sword, superpotion }; //this list contains all the items in the game and is iused in the superuser function to give you any item you want
@@ -46,27 +46,33 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     Console.WriteLine("2: enter shop");
                     Console.WriteLine("3: save");
                     Console.WriteLine("4: load");
+                    Console.WriteLine("5: quit");
                     //Console.WriteLine("484: Superuser menu");
                     playerchoice = Console.ReadLine();
                     if (playerchoice == "1")
                     {
                         Console.WriteLine("feature not implemented");
                     }
-                    if (playerchoice == "2")
+                    else if (playerchoice == "2")
                     {
                         Console.WriteLine("feature not implemented");
                     }
-                    if (playerchoice == "3")
+                    else if (playerchoice == "3")
                     {
                         Console.WriteLine("feature not implemented");
                     }
-                    if (playerchoice == "4")
+                    else if (playerchoice == "4")
                     {
                         Console.WriteLine("feature not implemented");
                     }
-                    if (playerchoice == "484") //this takes people to the superuser menu dont tell anyone
+                    else if (playerchoice == "484") //this takes people to the superuser menu dont tell anyone
                     {
                         Superuser();
+                        validchoice = true;
+                    }
+                    else if (playerchoice == "5")
+                    {
+                        gameisrunning = false;
                         validchoice = true;
                     }
                 }
@@ -77,7 +83,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
         }
         public void Superuser() //here is the debug tools use this for cheats and doing things such as adding things to player inventory or shop inventory
         {
-            
+            Console.WriteLine("welcome to the secret superuser menu dont tell anyone how you got here");
             int goldaddremove = 0;
             validchoice = false;
             while (!validchoice)

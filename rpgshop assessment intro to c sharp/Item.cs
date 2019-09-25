@@ -10,7 +10,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
     {
         private string _name = "";
         private int _cost = 0;
-        public Item(string name, int cost)
+        public Item(string name, int cost, string description)
         {
             _name = name;
             _cost = cost;
