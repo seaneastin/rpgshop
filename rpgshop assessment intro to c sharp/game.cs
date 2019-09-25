@@ -151,7 +151,11 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
 
         }
-
+        public void shop()
+        {
+            Console.WriteLine("Welcome to the shop");
+            Console.WriteLine("")
+        }
     }
 
 }
