@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace rpgshop_assessment_intro_to_c_sharp
 {
-    class shop
+    class Menu
     {
-        
+
     }
 }

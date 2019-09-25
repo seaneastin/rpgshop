@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="player.cs" />
     <Compile Include="Potion.cs" />
     <Compile Include="Program.cs" />
