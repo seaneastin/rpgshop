@@ -15,7 +15,8 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
             _name = name;
             _cost = cost;
-
+            
         }
+
     }
 }

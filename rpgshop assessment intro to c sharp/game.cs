@@ -9,21 +9,24 @@ namespace rpgshop_assessment_intro_to_c_sharp
 {
     class Game
     {
-        string playerchoice; //this is reused for the menu functions and other things such as adding gold and removeing gold
+        string playerchoice; //this is used by many functions in the program
         int gold = 0;
         bool validchoice = false; //this is used for the while loops used in the menus to prevent players from picking an invalid chocie
         bool gameisrunning = true;
         public void start()
         {
-            Item Empty = new Item("nothing", 0, "please replace me");   //this is used for when you have nothing in your inventory slot
+            Item Empty = new Item("nothing", 0, "please replace me");   //this is used for when you have nothing in your inventory slot this may be replaced later as with the dynamic array it will serve no purpose
             Item potion = new Potion("Potion", 10, "please replace me", 10);
             Item Mastersword = new Weapon("MasterSword", 999, "please replace me", 999);
             Item superpotion = new Potion("super potion", 20, "please replace me", 30);
             Item Sword = new Weapon("Sword", 10, "please replace me", 10);
-            Item[] playerinventory = { Empty, Empty, Empty, Empty, Empty }; //this is the players inventory
-            Item[] shopinventory = { Empty, Empty, Empty };  // this is the shops inventory
-            Item[] ItemList = { Mastersword, potion, Sword, superpotion }; //this list contains all the items in the game and is iused in the superuser function to give you any item you want
+            //Item[] playerinventory = { Empty, Empty, Empty, Empty, Empty }; //this is the players inventory i no longer need these
+            //Item[] shopinventory = { Empty, Empty, Empty };  // this is the shops inventory i no longer need this
+            Item[] ItemList = { Mastersword, potion, Sword, superpotion}; //this list contains all the items in the game and is iused in the superuser function to give you any item you want this is used rather than a dynamic array as there is no need for this to be bigger
+            Inventory player = new Inventory();
+            Inventory shop = new Inventory();
             menu(); //goes to the menu
+
         }
         public void printinventory() //
         {
@@ -47,7 +50,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     Console.WriteLine("3: save");
                     Console.WriteLine("4: load");
                     Console.WriteLine("5: quit");
-                    //Console.WriteLine("484: Superuser menu");
+                    //Console.WriteLine("484: Superuser menu"); use this to access the superuser menu
                     playerchoice = Console.ReadLine();
                     if (playerchoice == "1")
                     {
@@ -65,14 +68,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     {
                         Console.WriteLine("feature not implemented");
                     }
-                    else if (playerchoice == "484") //this takes people to the superuser menu dont tell anyone
-                    {
-                        Superuser();
-                        validchoice = true;
-                    }
                     else if (playerchoice == "5")
                     {
                         gameisrunning = false;
+                        validchoice = true;
+                    }
+                    else if (playerchoice == "484") //this takes people to the superuser menu dont tell anyone
+                    {
+                        Superuser();
                         validchoice = true;
                     }
                 }
@@ -111,7 +114,6 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     Console.WriteLine("please type how much gold you want");
                     goldaddremove = Convert.ToInt32(Console.ReadLine());
                     removegold(goldaddremove); //reuses the remove gold function but it allows user to set the value of gold
-                    Console.WriteLine("feature not implemented");
                     validchoice = true;
                     return;
                 }
@@ -130,7 +132,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
             }
 
         }
-        public void addgold(int addammount)
+        public void addgold(int addammount) 
         {
             gold = gold + addammount;
         }
@@ -138,7 +140,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
             gold = gold - removeammount;
         }
-        public void Save(string path)
+        public void Save(string path) //saving is not yet fininished
         {
             StreamWriter writer = File.CreateText(path);
             for (int i = 0; i < 10; i++) //placeholder for later
@@ -147,14 +149,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
             }
             
         }
-        public void Load()
+        public void Load() //cant make a load function untill i write a save function
         {
 
         }
-        public void shop()
+        public void shop() //may move shop somewhere else dont know yet.
         {
             Console.WriteLine("Welcome to the shop");
-            Console.WriteLine("")
+            Console.WriteLine("");
         }
     }
 
