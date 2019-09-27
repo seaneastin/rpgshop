@@ -10,11 +10,13 @@ namespace rpgshop_assessment_intro_to_c_sharp
     {
         private string _name = "";
         private int _cost = 0;
+        private int _healthrestored;
 
         public Potion(string name, int cost, string description , int healthrestored) : base(name,cost, description)
         {
             _name = name;
             _cost = cost;
+            _healthrestored = healthrestored;
             
         }
 

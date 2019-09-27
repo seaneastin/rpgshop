@@ -9,23 +9,31 @@ namespace rpgshop_assessment_intro_to_c_sharp
 {
     class Game
     {
+        public Item[] superuserlist;
         string playerchoice; //this is used by many functions in the program
         int gold = 0;
         bool validchoice = false; //this is used for the while loops used in the menus to prevent players from picking an invalid chocie
         bool gameisrunning = true;
+        Inventory playerinv = new Inventory();
+        Inventory shopinv = new Inventory();
         public void start()
         {
-            Item Empty = new Item("nothing", 0, "please replace me");   //this is used for when you have nothing in your inventory slot this may be replaced later as with the dynamic array it will serve no purpose
+            superuserlist = new Item[20]; //may be another way to use the super user list i am experimenting with this currently
             Item potion = new Potion("Potion", 10, "please replace me", 10);
             Item Mastersword = new Weapon("MasterSword", 999, "please replace me", 999);
             Item superpotion = new Potion("super potion", 20, "please replace me", 30);
             Item Sword = new Weapon("Sword", 10, "please replace me", 10);
             //Item[] playerinventory = { Empty, Empty, Empty, Empty, Empty }; //this is the players inventory i no longer need these
             //Item[] shopinventory = { Empty, Empty, Empty };  // this is the shops inventory i no longer need this
-            Item[] ItemList = { Mastersword, potion, Sword, superpotion}; //this list contains all the items in the game and is iused in the superuser function to give you any item you want this is used rather than a dynamic array as there is no need for this to be bigger
-            Inventory player = new Inventory();
-            Inventory shop = new Inventory();
+            //Item[] ItemList = { Mastersword, potion, Sword, superpotion}; //this list contains all the items in the game and is iused in the superuser function to give you any item you want this is used rather than a dynamic array as there is no need for this to be bigger
+
+            //shop setup
+            shopinv.Add(potion);
+            shopinv.Add(Sword);
+            shopinv.Add(potion);
+            shopinv.Add(superpotion);
             menu(); //goes to the menu
+            
 
         }
         public void printinventory() //
@@ -34,7 +42,10 @@ namespace rpgshop_assessment_intro_to_c_sharp
         }
         public void printshopinventory() //
         {
-
+            for (int i = 0; i < shopinv.Length; i++)
+            {
+                shopinv[i].printitem();
+            }
         }
 
         public void menu() //
@@ -58,6 +69,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     }
                     else if (playerchoice == "2")
                     {
+                        printshopinventory();
                         Console.WriteLine("feature not implemented");
                     }
                     else if (playerchoice == "3")

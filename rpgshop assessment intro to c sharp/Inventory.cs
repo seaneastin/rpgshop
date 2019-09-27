@@ -9,16 +9,16 @@ namespace rpgshop_assessment_intro_to_c_sharp
     class Inventory
     {
 
-        private object[] _list;
+        private Item[] _list = new Item[0];
 
         public void ArrayList()
         {
-            _list = new object[0];
+            _list = new Item[0];
         }
 
         public virtual int remove(int index)
         {
-            object[] newList = new object[_list.Length - 1];
+            Item[] newList = new Item[_list.Length - 1];
             int newPosition = 0;
             for (int i = 0; i < _list.Length; i++)
             {
@@ -34,9 +34,9 @@ namespace rpgshop_assessment_intro_to_c_sharp
             return j;
         }
 
-        public virtual int Add(object value)
+        public virtual int Add(Item value)
         {
-            object[] newList = new object[_list.Length + 1];
+            Item[] newList = new Item[_list.Length + 1];
             for (int i = 0; i < _list.Length; i++)
             {
                 newList[i] = _list[i];
@@ -50,10 +50,10 @@ namespace rpgshop_assessment_intro_to_c_sharp
         }
         public virtual void Clear()
         {
-            _list = new object[0];
+            _list = new Item[0];
         }
 
-        public virtual object this[int index]
+        public virtual Item this[int index]
         {
             set
             {
@@ -66,7 +66,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
         }
         public void print()
         {
-            foreach (object i in _list)
+            foreach (Item i in _list)
             {
                 Console.Write(i + " ");
             }
