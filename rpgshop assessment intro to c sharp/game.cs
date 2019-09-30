@@ -71,7 +71,6 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     else if (playerchoice == "2")
                     {
                         shop();
-
                     }
                     else if (playerchoice == "3")
                     {
@@ -146,7 +145,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
             }
 
         }
-        public int Gold
+        public int Gold //a property that allows you to change the gold value
         {
             get
             {
