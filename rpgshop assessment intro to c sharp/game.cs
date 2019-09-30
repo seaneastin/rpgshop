@@ -15,7 +15,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
         bool gameisrunning = true;
         Inventory playerinv = new Inventory();
         Inventory shopinv = new Inventory();
-        public void start()
+        public void start() //uses this to set evrything up before the game starts
         {
             Item potion = new Potion("Potion", 10, "please replace me", 10);
             Item Mastersword = new Weapon("MasterSword", 999, "please replace me", 999);
@@ -33,14 +33,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
         }
-        public void printinventory() //
+        public void printinventory() //prints the players inventory
         {
             for (int i = 0; i < playerinv.Length; i++)
             {
                 playerinv[i].printitem(i);
             }
         }
-        public void printshopinventory() //
+        public void printshopinventory() //prints the shops inventorty
         {
             for (int i = 0; i < shopinv.Length; i++)
             {
@@ -116,9 +116,10 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 if (playerchoice == "1")
                 {
 
-                    Console.WriteLine("please type how much gold you want");
-                    goldaddremove = Convert.ToInt32(Console.ReadLine()); //reuses the add gold function but it allows user to set the value of gold
-                    addgold(goldaddremove);
+                    Console.WriteLine("please type how much gold you want to add");
+                    goldaddremove = Convert.ToInt32(Console.ReadLine()); //has been made much better than the old function this uses a property instead
+                    //addgold(goldaddremove);
+                    Gold += goldaddremove;
                     validchoice = true;
                     return;
                 }
@@ -126,7 +127,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 {
                     Console.WriteLine("please type how much gold you want");
                     goldaddremove = Convert.ToInt32(Console.ReadLine());
-                    removegold(goldaddremove); //reuses the remove gold function but it allows user to set the value of gold
+                    Gold -= goldaddremove; //has been made much better than the old function this uses a property instead
                     validchoice = true;
                     return;
                 }
@@ -145,13 +146,16 @@ namespace rpgshop_assessment_intro_to_c_sharp
             }
 
         }
-        public void addgold(int addammount)
+        public int Gold
         {
-            gold = gold + addammount;
-        }
-        public void removegold(int removeammount)
-        {
-            gold = gold - removeammount;
+            get
+            {
+                return gold;
+            }
+            set
+            {
+                gold = value;
+            }
         }
         public void Save(string path) //saving is not yet fininished
         {
@@ -196,7 +200,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
         }
-        public void buy()
+        public void buy() //this is where a player buys things from the shop
         {
             validchoice = false;
             int i = 0;
