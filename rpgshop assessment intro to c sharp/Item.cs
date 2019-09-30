@@ -17,11 +17,18 @@ namespace rpgshop_assessment_intro_to_c_sharp
             _cost = cost;
             _description = description;
         }
-        public void printitem()  //
+        public void printitem(int i)  //
         {
+            Console.Write(i + ": ");
+            Console.WriteLine(_name);
             Console.WriteLine(_name);
             Console.WriteLine(_cost);
+            Console.WriteLine(_name);
             Console.WriteLine(_description);
+        }
+        public void printname()
+        {
+            Console.WriteLine(_name);
         }
     }
 }

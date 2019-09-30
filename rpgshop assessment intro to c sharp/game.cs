@@ -21,7 +21,8 @@ namespace rpgshop_assessment_intro_to_c_sharp
             Item Mastersword = new Weapon("MasterSword", 999, "please replace me", 999);
             Item superpotion = new Potion("super potion", 20, "please replace me", 30);
             Item Sword = new Weapon("Sword", 10, "please replace me", 10);
-            Item[] ItemList = { Mastersword, potion, Sword, superpotion}; //
+            
+            Item[] ItemList = { Mastersword, potion, Sword, superpotion}; //item list for super user allows superuser to look at itemlist
             
             //shop setup
             shopinv.Add(potion);
@@ -36,14 +37,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
             for (int i = 0; i < playerinv.Length; i++)
             {
-                playerinv[i].printitem();
+                playerinv[i].printitem(i);
             }
         }
         public void printshopinventory() //
         {
             for (int i = 0; i < shopinv.Length; i++)
             {
-                shopinv[i].printitem();
+                shopinv[i].printitem(i);
             }
         }
 
@@ -69,8 +70,8 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     }
                     else if (playerchoice == "2")
                     {
-                        printshopinventory();
-                        Console.WriteLine("feature not implemented");
+                        shop();
+                        
                     }
                     else if (playerchoice == "3")
                     {
@@ -167,8 +168,44 @@ namespace rpgshop_assessment_intro_to_c_sharp
         }
         public void shop() //may move shop somewhere else dont know yet.
         {
+            validchoice = false;
             Console.WriteLine("Welcome to the shop");
-            Console.WriteLine("");
+            Console.WriteLine("Would you like to buy or sell items");
+            while (!validchoice)
+            {
+                Console.WriteLine("Choose an option");
+                Console.WriteLine("1: Buy");
+                Console.WriteLine("2: Sell");
+                Console.WriteLine("3: go back");
+                playerchoice = Console.ReadLine();
+                if (playerchoice == "1")
+                {
+                    buy();
+                    validchoice = true;
+                }
+                else if (playerchoice == "1")
+                {
+                    sell();
+                    validchoice = true;
+                }
+                else if (playerchoice == "1")
+                {
+                    validchoice = true;
+                }
+            }
+           
+            
+        }
+        public void buy()
+        {
+            for(int i = 0; i < shopinv.Length; i++)
+            {
+                shopinv[i].printitem(i);
+            }
+        }
+        public void sell()
+        {
+
         }
     }
 
