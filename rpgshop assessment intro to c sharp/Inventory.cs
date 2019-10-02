@@ -79,7 +79,10 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 return _list.Length;
             }
         }
+        public void transfer() //this is for testing dont think it will work but 
+        {
 
+        }
     }
 
 }

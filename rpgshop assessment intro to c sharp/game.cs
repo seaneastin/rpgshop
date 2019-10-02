@@ -61,7 +61,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     Console.WriteLine("3: save");
                     Console.WriteLine("4: load");
                     Console.WriteLine("5: quit");
-                    Console.WriteLine("484: Superuser menu"); //use this to access the superuser menu
+                   // Console.WriteLine("484: Superuser menu"); //use this to access the superuser menu
                     playerchoice = Console.ReadLine();
                     if (playerchoice == "1")
                     {
@@ -74,10 +74,13 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     }
                     else if (playerchoice == "3")
                     {
-                        Console.WriteLine("feature not implemented");
+                        Save("invtest.txt");
+                        Console.WriteLine("save complete");
                     }
                     else if (playerchoice == "4")
                     {
+
+
                         Console.WriteLine("feature not implemented");
                     }
                     else if (playerchoice == "5")
@@ -159,15 +162,32 @@ namespace rpgshop_assessment_intro_to_c_sharp
         public void Save(string path) //saving is not yet fininished
         {
             StreamWriter writer = File.CreateText(path);
-            for (int i = 0; i < 10; i++) //placeholder for later
+            if (playerinv.Length > 0)
             {
-                writer.WriteLine();
+                for (int i = 0; i < playerinv.Length; i++) //placeholder for later
+                {
+                    writer.WriteLine(playerinv[i].printname);
+                }
+                
+                
             }
+            if (shopinv.Length > 0)
+            {
+                for (int i = 0; i < shopinv.Length; i++) //placeholder for later
+                {
+                    writer.WriteLine(shopinv[i].printname);
+                }
 
+            }
+            writer.Close();
         }
-        public void Load() //cant make a load function untill i write a save function
+        public void Load(string path) //cant make a load function untill i write a save function
         {
-
+            if (File.Exists(path))
+            {
+                StreamReader reader = File.OpenText(path);
+               // putsomethinghere = Convert.ToInt32(reader.ReadLine) //placeholder for now
+            }
         }
         public void shop() //may move shop somewhere else dont know yet.
         {
@@ -186,12 +206,12 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     buy();
                     validchoice = true;
                 }
-                else if (playerchoice == "1")
+                else if (playerchoice == "2")
                 {
                     sell();
                     validchoice = true;
                 }
-                else if (playerchoice == "1")
+                else if (playerchoice == "3")
                 {
                     validchoice = true;
                 }
@@ -221,6 +241,8 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     else
                     {
                         Console.WriteLine("this is not a valid choice");
+                        Console.WriteLine("press any key to continue");
+                        Console.ReadKey();
                     }
                 }
                 
@@ -234,10 +256,18 @@ namespace rpgshop_assessment_intro_to_c_sharp
         }
         public void sell()
         {
-            for (int i = 0; i < shopinv.Length; i++)
+            if (playerinv.Length > 0)
             {
-                playerinv[i].printitem(i);
+                for (int i = 0; i < shopinv.Length; i++)
+                {
+                    playerinv[i].printitem(i);
+                }
             }
+            else
+            {
+                Console.WriteLine("Player has no items");
+            }
+
 
         }
     }
