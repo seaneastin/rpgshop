@@ -10,6 +10,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
     class Game
     {
         string playerchoice; //this is used by many functions in the program
+       
         int gold = 0;
         bool validchoice = false; //this is used for the while loops used in the menus to prevent players from picking an invalid chocie
         bool gameisrunning = true;
@@ -20,8 +21,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
             Item potion = new Potion("Potion", 10, "please replace me", 10);
             Item Mastersword = new Weapon("MasterSword", 999, "please replace me", 999);
             Item superpotion = new Potion("super potion", 20, "please replace me", 30);
-            Item Sword = new Weapon("Sword", 10, "please replace me", 10);
-
+            Item Sword = new Weapon("Sword", 10, "please replace me", 10); 
             Item[] ItemList = { Mastersword, potion, Sword, superpotion }; //item list for super user allows superuser to look at itemlist
 
             //shop setup
@@ -66,7 +66,6 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     if (playerchoice == "1")
                     {
                         printinventory();
-                        Console.WriteLine("feature not implemented");
                     }
                     else if (playerchoice == "2")
                     {
@@ -235,7 +234,21 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     playerchoice = Console.ReadLine();
                     if (Convert.ToInt32(playerchoice) < shopinv.Length)
                     {
-                        Console.WriteLine("add buying here");
+                        Item Temp = shopinv.GetItem(Convert.ToInt32(playerchoice));
+                        if (gold >= Temp.cost)
+                        {
+                            shopinv.remove(Convert.ToInt32(playerchoice));
+                            playerinv.Add(Temp);
+                            //add gold property here
+                            validchoice = true;
+                            
+                        }
+                     else
+                        {
+                            Console.WriteLine("you dont have enough money to buy this");
+                            Console.ReadKey();
+                            validchoice = true;
+                        }
                     }
 
                     else
@@ -256,18 +269,41 @@ namespace rpgshop_assessment_intro_to_c_sharp
         }
         public void sell()
         {
+            validchoice = false;
+            int i = 0;
             if (playerinv.Length > 0)
             {
-                for (int i = 0; i < shopinv.Length; i++)
+                while (!validchoice)
                 {
-                    playerinv[i].printitem(i);
+                    for (i = 0; i < playerinv.Length; i++)
+                    {
+                        playerinv[i].printitem(i);
+                    }
+                    Console.WriteLine("choose an item to sell");
+                    playerchoice = Console.ReadLine();
+                    if (Convert.ToInt32(playerchoice) < playerinv.Length)
+                    {
+                        Item Temp = playerinv.GetItem(Convert.ToInt32(playerchoice));
+                            playerinv.remove(Convert.ToInt32(playerchoice));
+                            shopinv.Add(Temp);
+                        //add gold property here
+                        validchoice = true;
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("this is not a valid choice");
+                        Console.WriteLine("press any key to continue");
+                        Console.ReadKey();
+                    }
                 }
+
+
             }
             else
             {
-                Console.WriteLine("Player has no items");
+                Console.WriteLine("the player has no items");
             }
-
 
         }
     }

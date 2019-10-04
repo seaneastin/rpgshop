@@ -83,6 +83,11 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
 
         }
+        public Item GetItem(int choice)
+        {
+            return _list[choice];
+        }
+
     }
 
 }
