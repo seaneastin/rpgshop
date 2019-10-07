@@ -213,8 +213,8 @@ namespace rpgshop_assessment_intro_to_c_sharp
                         writer.WriteLine(shopinv[i].printname);
                         writer.WriteLine(shopinv[i].cost);
                         writer.WriteLine(shopinv[i].description);
-                        writer.WriteLine(shopinv[i].damage());
-                        writer.WriteLine(shopinv[i].healthrestored());
+                        writer.WriteLine(shopinv[i].damage()); //writes 0 if the item is not a weapon
+                        writer.WriteLine(shopinv[i].healthrestored()); //writes 0 if the item is not a potion
                     }
                     writer.Close();
                 }
@@ -225,10 +225,8 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
             if (File.Exists(path))
             {
-                playerinv.Clear();
-                shopinv.Clear();
+
                 bool loading = true;
-                string temp;
                 string type;
                 string name;
                 int cost;
@@ -236,8 +234,10 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 int heal;
                 string description;
                 
-                if (path == "playerinv.txt")
+                if (path == "playerinv.txt") 
+
                 {
+                    playerinv.Clear();
                     StreamReader reader = File.OpenText(path);
                     playergold = Convert.ToInt32(reader.ReadLine());
                     while (loading)
@@ -246,8 +246,8 @@ namespace rpgshop_assessment_intro_to_c_sharp
                         name = reader.ReadLine();
                         cost = Convert.ToInt32(reader.ReadLine());
                         description = reader.ReadLine();
-                        damage = Convert.ToInt32(reader.ReadLine());
-                        heal = Convert.ToInt32(reader.ReadLine());
+                        damage = Convert.ToInt32(reader.ReadLine()); //although it will read the 0 even if its a potion this value does nothing after the if statements
+                        heal = Convert.ToInt32(reader.ReadLine());  //although it will read the 0 even if its a weapon this value does nothing after the if statements
                         if (type == "weapon")
                         {
                             Item weapon = new Weapon(name, cost, description, damage);
@@ -267,6 +267,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 }
                 if (path == "shopinv.txt")
                 {
+                    shopinv.Clear();
                     StreamReader reader = File.OpenText(path);
                     shopgold = Convert.ToInt32(reader.ReadLine());
                     while (loading)

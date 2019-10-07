@@ -50,6 +50,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
            return "Item";
         }
+        public virtual int damage()
+        {
+            return 0;
+        }
+        public virtual int healthrestored()
+        {
+            return 0;
+        }
 
     }
 }

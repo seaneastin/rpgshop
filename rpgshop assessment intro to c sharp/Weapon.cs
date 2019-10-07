@@ -21,7 +21,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
             return "weapon";
         }
-        public int damage()
+        public override int damage()
         {
             return _damage;
         }
