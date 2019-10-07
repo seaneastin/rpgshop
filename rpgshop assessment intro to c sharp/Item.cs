@@ -21,9 +21,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
             Console.Write(i + ": ");
             Console.WriteLine(_name);
-            Console.WriteLine(_name);
             Console.WriteLine(_cost);
-            Console.WriteLine(_name);
             Console.WriteLine(_description);
         }
         public string printname
@@ -45,8 +43,13 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
             get
             {
-                return description;
+                return _description;
             }
         }
+        public virtual string itemtype()
+        {
+           return "Item";
+        }
+
     }
 }

@@ -11,17 +11,18 @@ namespace rpgshop_assessment_intro_to_c_sharp
     {
         string playerchoice; //this is used by many functions in the program
        
-        int gold = 0;
+        int playergold = 0;
+        int shopgold = 0;
         bool validchoice = false; //this is used for the while loops used in the menus to prevent players from picking an invalid chocie
         bool gameisrunning = true;
         Inventory playerinv = new Inventory();
         Inventory shopinv = new Inventory();
         public void start() //uses this to set evrything up before the game starts
         {
-            Item potion = new Potion("Potion", 10, "please replace me", 10);
-            Item Mastersword = new Weapon("MasterSword", 999, "please replace me", 999);
-            Item superpotion = new Potion("super potion", 20, "please replace me", 30);
-            Item Sword = new Weapon("Sword", 10, "please replace me", 10); 
+            Item potion = new Potion("Potion", 10, "this will heal you 10HP", 10);
+            Item Mastersword = new Weapon("MasterSword", 999, "cant even get this item in the game", 999);
+            Item superpotion = new Potion("super potion", 20, "this is better than the potion", 30);
+            Item Sword = new Weapon("Sword", 10, "its a regular sword", 10);
             Item[] ItemList = { Mastersword, potion, Sword, superpotion }; //item list for super user allows superuser to look at itemlist
 
             //shop setup
@@ -29,6 +30,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
             shopinv.Add(Sword);
             shopinv.Add(potion);
             shopinv.Add(superpotion);
+            playerinv.Add(potion);
             menu(); //goes to the menu
 
 
@@ -73,14 +75,16 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     }
                     else if (playerchoice == "3")
                     {
-                        Save("invtest.txt");
+                        Save("playerinv.txt");
+                        Save("shopinv.txt");
                         Console.WriteLine("save complete");
                     }
                     else if (playerchoice == "4")
                     {
 
-
-                        Console.WriteLine("feature not implemented");
+                        Load("playerinv.txt");
+                        Load("shopinv.txt");
+                        Console.WriteLine("Load Complete");
                     }
                     else if (playerchoice == "5")
                     {
@@ -120,7 +124,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     Console.WriteLine("please type how much gold you want to add");
                     goldaddremove = Convert.ToInt32(Console.ReadLine()); //has been made much better than the old function this uses a property instead
                     //addgold(goldaddremove);
-                    Gold += goldaddremove;
+                    playerGold += goldaddremove;
                     validchoice = true;
                     return;
                 }
@@ -128,7 +132,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 {
                     Console.WriteLine("please type how much gold you want");
                     goldaddremove = Convert.ToInt32(Console.ReadLine());
-                    Gold -= goldaddremove; //has been made much better than the old function this uses a property instead
+                    playerGold -= goldaddremove; //has been made much better than the old function this uses a property instead
                     validchoice = true;
                     return;
                 }
@@ -147,45 +151,151 @@ namespace rpgshop_assessment_intro_to_c_sharp
             }
 
         }
-        public int Gold //a property that allows you to change the gold value
+        public int playerGold //a property that allows you to change the gold value
         {
             get
             {
-                return gold;
+                return playergold;
             }
             set
             {
-                gold = value;
+                playergold = value;
+            }
+        }
+        public int ShopGold //a property that allows you to change the gold value
+        {
+            get
+            {
+                return shopgold;
+            }
+            set
+            {
+                shopgold = value;
             }
         }
         public void Save(string path) //saving is not yet fininished
         {
-            StreamWriter writer = File.CreateText(path);
-            if (playerinv.Length > 0)
+            
+            if (path == "playerinv.txt")
             {
-                for (int i = 0; i < playerinv.Length; i++) //placeholder for later
-                {
-                    writer.WriteLine(playerinv[i].printname);
-                }
-                
-                
-            }
-            if (shopinv.Length > 0)
-            {
-                for (int i = 0; i < shopinv.Length; i++) //placeholder for later
-                {
-                    writer.WriteLine(shopinv[i].printname);
-                }
 
+                StreamWriter writer = File.CreateText(path);
+                writer.WriteLine(playerGold);
+                if (playerinv.Length > 0)
+                {
+
+                    
+                    for (int i = 0; i < playerinv.Length; i++) //placeholder for later
+                    {
+                        writer.WriteLine(playerinv[i].itemtype());
+                        writer.WriteLine(playerinv[i].printname);
+                        writer.WriteLine(playerinv[i].cost);
+                        writer.WriteLine(playerinv[i].description);
+                        writer.WriteLine(playerinv[i].damage());
+                        writer.WriteLine(playerinv[i].healthrestored());
+
+                    }
+
+                    writer.Close();
+                }
             }
-            writer.Close();
+            if (path == "shopinv.txt")
+            {
+                StreamWriter writer = File.CreateText(path);
+                writer.WriteLine(ShopGold);
+                if (shopinv.Length > 0)
+                {
+                    
+                    
+                    for (int i = 0; i < shopinv.Length; i++) //placeholder for later
+                    {
+                        writer.WriteLine(shopinv[i].itemtype());
+                        writer.WriteLine(shopinv[i].printname);
+                        writer.WriteLine(shopinv[i].cost);
+                        writer.WriteLine(shopinv[i].description);
+                        writer.WriteLine(shopinv[i].damage());
+                        writer.WriteLine(shopinv[i].healthrestored());
+                    }
+                    writer.Close();
+                }
+            }
+            
         }
         public void Load(string path) //cant make a load function untill i write a save function
         {
             if (File.Exists(path))
             {
-                StreamReader reader = File.OpenText(path);
-               // putsomethinghere = Convert.ToInt32(reader.ReadLine) //placeholder for now
+                playerinv.Clear();
+                shopinv.Clear();
+                bool loading = true;
+                string temp;
+                string type;
+                string name;
+                int cost;
+                int damage;
+                int heal;
+                string description;
+                
+                if (path == "playerinv.txt")
+                {
+                    StreamReader reader = File.OpenText(path);
+                    playergold = Convert.ToInt32(reader.ReadLine());
+                    while (loading)
+                    {
+                        type = reader.ReadLine();
+                        name = reader.ReadLine();
+                        cost = Convert.ToInt32(reader.ReadLine());
+                        description = reader.ReadLine();
+                        damage = Convert.ToInt32(reader.ReadLine());
+                        heal = Convert.ToInt32(reader.ReadLine());
+                        if (type == "weapon")
+                        {
+                            Item weapon = new Weapon(name, cost, description, damage);
+                            playerinv.Add(weapon);
+                        }
+                        if (type == "potion")
+                        {
+                            Item potion = new Potion(name, cost, description, heal);
+                            playerinv.Add(potion);
+                        }
+                        if (type == null)
+                        {
+                            loading = false;
+                        }
+                    }
+                    reader.Close();
+                }
+                if (path == "shopinv.txt")
+                {
+                    StreamReader reader = File.OpenText(path);
+                    shopgold = Convert.ToInt32(reader.ReadLine());
+                    while (loading)
+                    {
+                        type = reader.ReadLine();
+                        name = reader.ReadLine();
+                        cost = Convert.ToInt32(reader.ReadLine());
+                        description = reader.ReadLine();
+                        damage = Convert.ToInt32(reader.ReadLine());
+                        heal = Convert.ToInt32(reader.ReadLine());
+                        if (type == "weapon")
+                        {
+                            Item weapon = new Weapon(name, cost, description, damage);
+                            shopinv.Add(weapon);
+                        }
+                        if (type == "potion")
+                        {
+                            Item potion = new Potion(name, cost, description, heal);
+                            shopinv.Add(potion);
+                        }
+                        if (type == null)
+                        {
+                            loading = false;
+                        }
+                        
+                    }
+                    reader.Close();
+                }
+                // putsomethinghere = Convert.ToInt32(reader.ReadLine) //placeholder for now
             }
         }
         public void shop() //may move shop somewhere else dont know yet.
@@ -235,7 +345,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     if (Convert.ToInt32(playerchoice) < shopinv.Length)
                     {
                         Item Temp = shopinv.GetItem(Convert.ToInt32(playerchoice));
-                        if (gold >= Temp.cost)
+                        if (playergold >= Temp.cost)
                         {
                             shopinv.remove(Convert.ToInt32(playerchoice));
                             playerinv.Add(Temp);

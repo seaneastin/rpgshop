@@ -19,6 +19,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
             _healthrestored = healthrestored;
             
         }
+        public override string itemtype()
+        {
+            return "potion";
+        }
+        public int healthrestored()
+        {
+            return _healthrestored;
+        }
 
     }
 }
