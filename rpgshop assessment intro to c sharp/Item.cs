@@ -21,8 +21,9 @@ namespace rpgshop_assessment_intro_to_c_sharp
         {
             Console.Write(i + ": ");
             Console.WriteLine(_name);
-            Console.WriteLine(_cost);
-            Console.WriteLine(_description);
+            Console.WriteLine( "cost: " + _cost);
+            Console.WriteLine("description: " + _description);
+            Console.WriteLine();
         }
         public string printname
         {
