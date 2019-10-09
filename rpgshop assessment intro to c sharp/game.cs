@@ -64,7 +64,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 while (!validchoice)
                 {
                     Console.WriteLine("pick an option");
-                    Console.WriteLine("1:player inventory");
+                    Console.WriteLine("1: player inventory");
                     Console.WriteLine("2: enter shop");
                     Console.WriteLine("3: save");
                     Console.WriteLine("4: load");
@@ -146,7 +146,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 }
                 if (playerchoice == "3")
                 {
-                    superuseraddremoveitems();
+                    superuseradditems();
                     Console.WriteLine("feature not implemented");
                     validchoice = true;
                     return;
@@ -160,7 +160,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
             }
 
         }
-        public void superuseraddremoveitems()
+        public void superuseradditems()
         {
             string itemtype = "";
             string itemname = "";
@@ -477,7 +477,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     {
                         playerinv[i].printitem(i);
                     }
-                    Console.WriteLine("choose an item to sell");
+                    Console.WriteLine("choose an item to sell or enter a number not on the list to go back");
                     playerchoice = Console.ReadLine();
                     if (Convert.ToInt32(playerchoice) < playerinv.Length)
                     {
@@ -490,7 +490,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
                     else
                     {
-                        Console.WriteLine("this is not a valid choice");
+                        validchoice = true;
                         Console.WriteLine("press any key to continue");
                         Console.ReadKey();
                     }
