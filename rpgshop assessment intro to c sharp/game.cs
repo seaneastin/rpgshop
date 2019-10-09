@@ -27,7 +27,6 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 Item Mastersword = new Weapon("MasterSword", 999, "cant even get this item in the game", 999);
                 Item superpotion = new Potion("super potion", 20, "this is better than the potion", 30);
                 Item Sword = new Weapon("Sword", 10, "its a regular sword", 10);
-                Item[] ItemList = { Mastersword, potion, Sword, superpotion }; //item list for super user allows superuser to look at itemlist
 
                 //shop setup
                 shopinv.Add(potion);
@@ -122,7 +121,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 Console.WriteLine("what do you want to do");
                 Console.WriteLine("1: add gold");
                 Console.WriteLine("2: remove gold");
-                Console.WriteLine("3: add or remove items from shop/player inventory");
+                Console.WriteLine("3: add item to shop/player inventory");
                 Console.WriteLine("4: go back to game");
                 Console.WriteLine("type a number and press enter");
                 playerchoice = Console.ReadLine();
