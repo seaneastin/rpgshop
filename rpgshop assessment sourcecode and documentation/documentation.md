@@ -123,3 +123,40 @@ Name : sell
 description : this option allows the user to sell items to the shop inventory
 type : function
 
+**File** Item.cs
+Description : is an item constructor weapon and potion inherit from this.
+
+name : _name
+description : the name of the item
+type : string
+protection : private
+
+name : _cost
+description : the items cost
+type : int
+protection : private
+
+name: _description
+description : this is the items description
+type: string
+protection: private
+
+name: Item
+description this is a constructor that uses name cost and description which when passed in will fill out the private variables
+type: constructor
+
+name: printname
+description: prints the name of the item
+type : property
+
+name: cost
+desription: used to return the cost of an item
+type: property
+
+name: description
+description: returns the items description
+type: property
+
+name: itemtype
+description: tells the game when it is saving what type of item it is this is virtual in item.cs but is replaced with something
+type: 
