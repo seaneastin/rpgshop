@@ -7,18 +7,25 @@
 ## I. Requirements
 
 1. Description of Problem
-- **Name**: Number Guessing Game
-- **Problme Statement**:
+- **Name**: RPGSHOP
+- **Problme Statement**: create a text based prg shop using the c# language
 
-- **Problem Specifications**:
+
+- **Problem Specifications**: the game must include a dynamic array
 
 2. Input Information
--
+- the user uses a keyboard to enter responses.
 
 3. Output Information
--
+
+-the game begins on a menu which will ask the user what they want to do from here the user can enter the shop, look at their inventory, save or load and if they type in 484 they will be taken to the superuser menu
+
+-the shop menu will ask the user if they want to sell or buy items. if the player cannot afford items or the shop cannot afford the users items then they cannot complete the transaction
+
+-the superuser menu allows users to add gold to the player and create their own items.
 
 4. User Interface Information
+- the program displays everything in a console
 
 ## II. Design
 
@@ -27,6 +34,11 @@
 |Game Diagram
 |:-
 ![Game diagram](rpgshop diagram)
+
+2. Known Bugs
+    - when loading and saving it will ask you to press any key to continue it will ask you this twice due to the way i made the save and load functions
+    - if you enter anything incorrect such as in the superuser function if you enter a string into int32 it will crash.
+    -
 
 
 ### Object Information
@@ -158,5 +170,61 @@ description: returns the items description
 type: property
 
 name: itemtype
-description: tells the game when it is saving what type of item it is this is virtual in item.cs but is replaced with something
-type: 
+description: returns the items type.
+type: property
+
+name: damage
+description: returns the items damage.
+type: function
+
+name: healthrestored
+description: returns the amount of health an item restores.
+type: function
+
+**File** potion.cs
+description : this inherits from item.cs 
+
+name : healthrestored
+description: this returns the amount of health a potion restores.
+type: function
+
+**File** weapon.cs
+description : this inherits from item.cs
+
+name :  damage
+description : returns the items damage.
+type: function
+**File** Inventory.cs
+description : contains a dynamic array
+
+name : ArrayList
+description:
+type: function
+
+name: remove
+description: removes an item from the array
+type: function
+
+name: add
+description: adds an item from the array
+type: function
+
+name: Clear
+description: clears the array
+type: function
+
+name: this
+description:
+type: property
+
+name: print
+description: prints the items name with a number
+type: function
+
+name: Length
+description: returns the Length of the array
+type: property
+
+name: GetItem
+description:
+type: function

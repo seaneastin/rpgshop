@@ -11,12 +11,18 @@ namespace rpgshop_assessment_intro_to_c_sharp
         private string _name = "";
         private int _cost = 0;
         private string _description;
+
+
+
         public Item(string name, int cost, string description)
         {
             _name = name;
             _cost = cost;
             _description = description;
         }
+
+
+
         public void printitem(int i)  //
         {
             Console.Write(i + ": ");
@@ -25,6 +31,9 @@ namespace rpgshop_assessment_intro_to_c_sharp
             Console.WriteLine("description: " + _description);
             Console.WriteLine();
         }
+
+
+
         public string printname
         {
             get
@@ -33,6 +42,9 @@ namespace rpgshop_assessment_intro_to_c_sharp
             }
             
         }
+
+
+
         public int cost
         {
             get
@@ -40,6 +52,9 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 return _cost;
             }
         }
+
+
+
         public string description
         {
             get
@@ -47,14 +62,23 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 return _description;
             }
         }
+
+
+
         public virtual string itemtype()
         {
            return "Item";
         }
+
+
+
         public virtual int damage()
         {
             return 0;
         }
+
+
+
         public virtual int healthrestored()
         {
             return 0;
