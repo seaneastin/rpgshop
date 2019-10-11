@@ -151,14 +151,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
                 if (playerchoice == "1")
                 {
-                    Console.WriteLine("\n");
+                    Console.WriteLine("\n"); //used these a lot as it was hard to read on the console
                     Console.WriteLine("\n");
                     Console.WriteLine("\n");
                     Console.WriteLine("\n");
                     Console.WriteLine("please type how much gold you want to add");
-                    goldaddremove = Convert.ToInt32(Console.ReadLine()); //has been made much better than the old function this uses a property instead
-                    //addgold(goldaddremove);
+                    goldaddremove = Convert.ToInt32(Console.ReadLine());
                     playerGold += goldaddremove;
+                    
                     validchoice = true;
                     return;
                 }
@@ -170,7 +170,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     Console.WriteLine("\n");
                     Console.WriteLine("please type how much gold you want");
                     goldaddremove = Convert.ToInt32(Console.ReadLine());
-                    playerGold -= goldaddremove; //has been made much better than the old function this uses a property instead
+                    playerGold -= goldaddremove; 
                     validchoice = true;
                     return;
                 }
@@ -193,7 +193,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
 
-        public void superuseradditems()
+        public void superuseradditems() //will allow anyone to create an item in the game
         {
             string itemname = "";
             string itemcost = "";
@@ -301,7 +301,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
 
-        public void Save(string path) //saving is not yet fininished
+        public void Save(string path) 
         {
             
             if (path == "playerinv.txt")
@@ -313,7 +313,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 {
 
                     
-                    for (int i = 0; i < playerinv.Length; i++) //placeholder for later
+                    for (int i = 0; i < playerinv.Length; i++) 
                     {
                         writer.WriteLine(playerinv[i].itemtype());
                         writer.WriteLine(playerinv[i].printname);
@@ -335,7 +335,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 {
                     
                     
-                    for (int i = 0; i < shopinv.Length; i++) //placeholder for later
+                    for (int i = 0; i < shopinv.Length; i++) 
                     {
                         writer.WriteLine(shopinv[i].itemtype());
                         writer.WriteLine(shopinv[i].printname);
@@ -359,12 +359,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
 
-        public void Load(string path) //cant make a load function untill i write a save function
+        public void Load(string path) 
         {
             if (File.Exists(path))
             {
 
-                bool loading = true;
+                bool loading = true; //used to make a while loop
+
+                //these are used for loading stuff when the game is reading the save file these values are then used later
                 string type;
                 string name;
                 int cost;
@@ -447,7 +449,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
 
-        public void shop() //may move shop somewhere else dont know yet.
+        public void shop() 
         {
             validchoice = false;
             Console.WriteLine("Welcome to the shop");
@@ -564,7 +566,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                         {
                             playerinv.remove(Convert.ToInt32(playerchoice));
                             shopinv.Add(Temp);
-                            //add gold property here
+                            
                             validchoice = true;
                         }
                         else
@@ -587,9 +589,11 @@ namespace rpgshop_assessment_intro_to_c_sharp
             {
                 Console.WriteLine("the player has no items");
             }
+            
 
         }
     }
+
 
 }
 
