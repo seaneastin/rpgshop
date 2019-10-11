@@ -44,8 +44,8 @@ for when the player starts the game
 when the player enters the shop this happens
 
 2. Known Bugs
-    - when loading and saving it will ask you to press any key to continue it will ask you this twice due to the way i made the save and load functions
-    - if you enter anything incorrect such as in the superuser function if you enter a string into int32 it will crash.
+
+
 
 
 
