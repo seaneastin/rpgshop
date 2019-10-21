@@ -7,31 +7,36 @@ namespace rpgshop_assessment_intro_to_c_sharp
     {
         string playerchoice; //this is used by many functions in the program
         string playerchoice2; //this is used by many functions in the program
+       
 
-        int playergold = 0;
-        int shopgold = 0;
+        int playergold = 500;
+        int shopgold = 500;
         bool validchoice = false; //this is used for the while loops used in the menus to prevent players from picking an invalid chocie
-        bool gameisrunning = true;
-        Inventory playerinv = new Inventory();
-        Inventory shopinv = new Inventory();
+        bool gameisrunning = true; //tells the program if the game is currently running
+        int shopchoice = 0; //the players choice when they are buying an item
+        Inventory playerinv = new Inventory(); //the players inventory 
+        Inventory shopinv = new Inventory(); //the shops inventory
 
 
 
         public void start() //uses this to set evrything up before the game starts
         {
-            if (File.Exists("playerinv.txt") && File.Exists("shopinv.txt"))
+            if (File.Exists("playerinv.txt") && File.Exists("shopinv.txt"))  //checks to see if a save file exists
             {
-                Load("playerinv.txt");
+                Load("playerinv.txt"); //it will load the save files for the player
                 Load("shopinv.txt");
             }
             else //if a save file is deleted manulaly by the user the game will load this instead to prevent crashing
             {
+
+
+                //these items are used if a player does not have a save file
                 Item potion = new Potion("Potion", 10, "this will heal you 10HP", 10);
-                Item Mastersword = new Weapon("MasterSword", 999, "cant even get this item in the game", 999);
                 Item superpotion = new Potion("super potion", 20, "this is better than the potion", 30);
                 Item Sword = new Weapon("Sword", 10, "its a regular sword", 10);
 
-                //shop setup
+
+                //these will add items to the shop
                 shopinv.Add(potion);
                 shopinv.Add(Sword);
                 shopinv.Add(potion);
@@ -49,14 +54,15 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
         public void printinventory() //prints the players inventory
         {
-            Console.WriteLine("\n");
-            Console.WriteLine("\n");
-            Console.WriteLine("\n");
+
+            Console.Clear(); //these will wipe the screen whenever any function or menu is called
             Console.WriteLine("gold: " + playergold);
             for (int i = 0; i < playerinv.Length; i++)
             {
                 playerinv[i].printitem(i);
             }
+            Console.WriteLine("press any key to continue");
+            Console.ReadKey();
         }
         public void printshopinventory() //prints the shops inventorty
         {
@@ -70,13 +76,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
 
-        public void menu() //
+        public void menu() //the menu for the game
         {
             while (gameisrunning)
             {
                 validchoice = false;
                 while (!validchoice)
                 {
+                    Console.Clear();
                     Console.WriteLine("pick an option");
                     Console.WriteLine("1: player inventory");
                     Console.WriteLine("2: enter shop");
@@ -86,28 +93,28 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     Console.WriteLine("the game will autosave if you close the game using the menu");
                    //Console.WriteLine("484: Superuser menu"); //use this to access the superuser menu
                     playerchoice = Console.ReadLine();
-                    if (playerchoice == "1")
+                    if (playerchoice == "1") //prints the inventory
                     {
                         printinventory();
                     }
-                    else if (playerchoice == "2")
+                    else if (playerchoice == "2") //enters the shop
                     {
                         shop();
                     }
-                    else if (playerchoice == "3")
+                    else if (playerchoice == "3") //saves the game if player wants to without exiting
                     {
                         Save("playerinv.txt");
                         Save("shopinv.txt");
                         Console.WriteLine("save complete");
                     }
-                    else if (playerchoice == "4")
+                    else if (playerchoice == "4") //allows you to load a save file
                     {
 
                         Load("playerinv.txt");
                         Load("shopinv.txt");
                         Console.WriteLine("Load Complete");
                     }
-                    else if (playerchoice == "5")
+                    else if (playerchoice == "5") //quits the game and saves it
                     {
                         Save("playerinv.txt");
                         Save("shopinv.txt");
@@ -131,9 +138,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
         public void Superuser() //here is the debug tools use this for cheats and doing things such as adding things to player inventory or shop inventory
         {
-            Console.WriteLine("\n");
-            Console.WriteLine("\n");
-            Console.WriteLine("\n");
+            Console.Clear();
             Console.WriteLine("welcome to the secret superuser menu dont tell anyone how you got here");
             
             int goldaddremove = 0;
@@ -149,12 +154,15 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 Console.WriteLine("type a number and press enter");
                 playerchoice = Console.ReadLine();
 
-                if (playerchoice == "1")
+
+
+
+
+
+
+                if (playerchoice == "1") //this is for adding gold
                 {
-                    Console.WriteLine("\n"); //used these a lot as it was hard to read on the console
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
+                    Console.Clear();
                     Console.WriteLine("please type how much gold you want to add");
                     if (Int32.TryParse(Console.ReadLine(), out goldaddremove )) //this will check to see if you enter a valid number into the console in order to prevent crashing
                     {
@@ -168,12 +176,15 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     validchoice = true;
                     return;
                 }
-                if (playerchoice == "2")
+
+
+
+
+
+
+                if (playerchoice == "2") //this is for removeing gold
                 {
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
+                    Console.Clear();
                     Console.WriteLine("please type how much gold you want to remove");
 
                     if (Int32.TryParse(Console.ReadLine(), out goldaddremove))
@@ -187,14 +198,18 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     validchoice = true;
                     return;
                 }
-                if (playerchoice == "3")
+
+
+
+
+                if (playerchoice == "3") //this allows you to create your own items
                 {
                     superuseradditems();
                     
                     validchoice = true;
                     return;
                 }
-                if (playerchoice == "4")
+                if (playerchoice == "4") //this is for returning to the menu
                 {
                     validchoice = true;
                     return;
@@ -215,10 +230,11 @@ namespace rpgshop_assessment_intro_to_c_sharp
             validchoice = false;
             while (!validchoice)
             {
+                Console.Clear();
                 Console.WriteLine("what do you want to do");
                 Console.WriteLine("1: add item to playerinventory");
                 Console.WriteLine("2: add item to shopinventory");
-                playerchoice = Console.ReadLine();
+                playerchoice = Console.ReadLine(); //playerchoice 1 is used here for telling which inventory to add the custom item
                 if (playerchoice == "1" || playerchoice == "2")
                 {
                     
@@ -232,7 +248,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     Console.WriteLine("choose item type");
                     Console.WriteLine("1: Weapon");
                     Console.WriteLine("2: Potion");
-                    playerchoice2 = Console.ReadLine();
+                    playerchoice2 = Console.ReadLine(); //playerchoice 2 is used for telling the item type
 
                     if (playerchoice2 == "1")
                     {
@@ -259,7 +275,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
             }
                 Console.WriteLine("write a description");
                 itemdescript = Console.ReadLine();
-                if (playerchoice2 == "1")
+                if (playerchoice2 == "1") //this is for item type weapon
                 {
                 validchoice = false;
                 while (!validchoice)
@@ -281,7 +297,12 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     }
 
                 }
-                if (playerchoice2 == "2")
+
+
+
+
+
+                if (playerchoice2 == "2") //this is for item type potion
                 {
                 validchoice = false;
                 while (!validchoice)
@@ -339,9 +360,9 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
 
-        public void Save(string path) 
+        public void Save(string path) //this is the saving function
         {
-            
+            //this if statement is used to tell whic inventory is currently saving
             if (path == "playerinv.txt")
             {
 
@@ -365,6 +386,8 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     writer.Close();
                 }
             }
+
+
             if (path == "shopinv.txt")
             {
                 StreamWriter writer = File.CreateText(path);
@@ -383,9 +406,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                         writer.WriteLine(shopinv[i].healthrestored()); //writes 0 if the item is not a potion
                     }
                     writer.Close();
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
+                    Console.Clear();
                     Console.WriteLine("save file saved");
                     Console.WriteLine("press any key to continue");
                     Console.ReadKey();
@@ -413,6 +434,8 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 int heal;
                 string description;
                 
+
+                //used to tell which file is loading
                 if (path == "playerinv.txt") 
 
                 {
@@ -444,6 +467,13 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     }
                     reader.Close();
                 }
+
+
+
+
+
+
+
                 if (path == "shopinv.txt")
                 {
                     shopinv.Clear();
@@ -474,9 +504,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
                         
                     }
                     reader.Close();
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
+                    Console.Clear();
                     Console.WriteLine("save file loaded");
                     Console.WriteLine("press any key to continue");
                     Console.ReadKey();
@@ -494,7 +522,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
 
-        public void shop() 
+        public void shop() //the shop
         {
             validchoice = false;
             Console.WriteLine("Welcome to the shop");
@@ -508,19 +536,13 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 playerchoice = Console.ReadLine();
                 if (playerchoice == "1")
                 {
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
+                    Console.Clear();
                     buy();
                     validchoice = true;
                 }
                 else if (playerchoice == "2")
                 {
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
-                    Console.WriteLine("\n");
+                    Console.Clear();
                     sell();
                     validchoice = true;
                 }
@@ -550,32 +572,38 @@ namespace rpgshop_assessment_intro_to_c_sharp
                     }
                     Console.WriteLine("choose an item to buy type a number that is not on the list to go back");
                     playerchoice = Console.ReadLine();
-                    if (Convert.ToInt32(playerchoice) < shopinv.Length)
+                    if (Int32.TryParse((playerchoice), out shopchoice))
                     {
-                        Item Temp = shopinv.GetItem(Convert.ToInt32(playerchoice));
-                        if (playergold >= Temp.cost)
+                        if (shopchoice < shopinv.Length)
                         {
-                            shopinv.remove(Convert.ToInt32(playerchoice));
-                            playerinv.Add(Temp);
-                            playerGold -= Temp.cost;
-                            ShopGold += Temp.cost;
-                            validchoice = true;
-                            
+
+
+                            Item Temp = shopinv.GetItem(Convert.ToInt32(playerchoice));
+                            if (playergold >= Temp.cost)
+                            {
+                                shopinv.remove(Convert.ToInt32(playerchoice));
+                                playerinv.Add(Temp);
+                                playerGold -= Temp.cost;
+                                ShopGold += Temp.cost;
+                                validchoice = true;
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("you dont have enough money to buy this");
+                                Console.ReadKey();
+                                validchoice = true;
+                            }
                         }
-                     else
+                        else
                         {
-                            Console.WriteLine("you dont have enough money to buy this");
-                            Console.ReadKey();
+                            Console.WriteLine("press any key to continue");
                             validchoice = true;
+                            Console.ReadKey();
                         }
                     }
 
-                    else
-                    {
-                        Console.WriteLine("press any key to continue");
-                        validchoice = true;
-                        Console.ReadKey();
-                    }
+                   
                 }
                 
 
@@ -603,29 +631,38 @@ namespace rpgshop_assessment_intro_to_c_sharp
                         playerinv[i].printitem(i);
                     }
                     Console.WriteLine("choose an item to sell or enter a number not on the list to go back");
-                    playerchoice = Console.ReadLine();
-                    if (Convert.ToInt32(playerchoice) < playerinv.Length)
+
+                    
+                        playerchoice = Console.ReadLine();
+
+                    if (Int32.TryParse(playerchoice, out shopchoice))
                     {
-                        Item Temp = playerinv.GetItem(Convert.ToInt32(playerchoice));
-                        if (playergold >= Temp.cost)
+                        if (shopchoice < playerinv.Length)
                         {
-                            playerinv.remove(Convert.ToInt32(playerchoice));
-                            shopinv.Add(Temp);
-                            
-                            validchoice = true;
+
+
+                            Item Temp = playerinv.GetItem(Convert.ToInt32(playerchoice));
+                            if (playergold >= Temp.cost)
+                            {
+                                playerinv.remove(Convert.ToInt32(playerchoice));
+                                shopinv.Add(Temp);
+
+                                validchoice = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("shop does not have enough gold");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("shop does not have enough gold");
+                            validchoice = true;
+                            Console.WriteLine("press any key to continue");
+                            Console.ReadKey();
                         }
                     }
 
-                    else
-                    {
-                        validchoice = true;
-                        Console.WriteLine("press any key to continue");
-                        Console.ReadKey();
-                    }
+
                 }
 
 

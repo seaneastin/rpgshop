@@ -1,0 +1,25 @@
+0
+potion
+Potion
+10
+this will heal you 10HP
+0
+10
+weapon
+Sword
+10
+its a regular sword
+10
+0
+potion
+Potion
+10
+this will heal you 10HP
+0
+10
+potion
+super potion
+20
+this is better than the potion
+0
+30

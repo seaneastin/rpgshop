@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace rpgshop_assessment_intro_to_c_sharp
 {
-    class Weapon : Item
+    class Weapon : Item //inherits from the item class
     {
-        private string _name = "";
-        private int _cost = 0;
         private int _damage = 0;
 
 

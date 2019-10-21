@@ -9,14 +9,13 @@ namespace rpgshop_assessment_intro_to_c_sharp
     class Inventory
     {
 
+        //this is a dynamic array this is used by the shop and player inventory
+
+
+
         private Item[] _list = new Item[0];
 
-        public void ArrayList()
-        {
-            _list = new Item[0];
-        }
-
-        public virtual int remove(int index)
+        public virtual int remove(int index) //this removes something from an array
         {
             Item[] newList = new Item[_list.Length - 1];
             int newPosition = 0;
@@ -34,7 +33,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
             return j;
         }
 
-        public virtual int Add(Item value)
+        public virtual int Add(Item value) //this add something to the array
         {
             Item[] newList = new Item[_list.Length + 1];
             for (int i = 0; i < _list.Length; i++)
@@ -48,7 +47,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
             int j = 0;
             return j;
         }
-        public virtual void Clear()
+        public virtual void Clear() //clears out an inventory used durring the load function
         {
             _list = new Item[0];
         }
@@ -64,22 +63,14 @@ namespace rpgshop_assessment_intro_to_c_sharp
                 return _list[index];
             }
         }
-        public void print()
-        {
-            foreach (Item i in _list)
-            {
-                Console.Write(i + " ");
-            }
-            Console.WriteLine();
-        }
-        public int Length
+        public int Length //the Length of the array
         {
             get
             {
                 return _list.Length;
             }
         }
-        public Item GetItem(int choice)
+        public Item GetItem(int choice) 
         {
             return _list[choice];
         }

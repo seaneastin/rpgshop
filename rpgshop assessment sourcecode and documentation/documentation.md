@@ -54,6 +54,7 @@ when the player enters the shop this happens
 **File**: program.cs
 
 
+
 **File**: game.cs
 
 Description: where most of the game is run
@@ -82,6 +83,10 @@ type : bool
 Name : gameisrunning
 Description : used to keep the game running.
 type : bool
+
+Name : shopchoice
+Description : used for when you buy something this is used so you can tryparse
+type : Int
 
 Name : playerinv
 Description : holds the players inventory.

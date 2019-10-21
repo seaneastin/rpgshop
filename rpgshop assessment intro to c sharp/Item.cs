@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace rpgshop_assessment_intro_to_c_sharp
 {
-    class Item
+    class Item //this is a base class that item and weapon inherit from
     {
-        private string _name = "";
-        private int _cost = 0;
-        private string _description;
+        protected string _name = "";
+        protected int _cost = 0;
+        protected string _description;
 
 
 
@@ -23,7 +23,7 @@ namespace rpgshop_assessment_intro_to_c_sharp
 
 
 
-        public void printitem(int i)  //
+        public void printitem(int i)  //prints items
         {
             Console.Write(i + ": ");
             Console.WriteLine(_name);

@@ -1,0 +1,7 @@
+0
+potion
+Potion
+10
+this will heal you 10HP
+0
+10
